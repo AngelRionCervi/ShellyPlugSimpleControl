@@ -1,16 +1,17 @@
 #include <unordered_map>
+#include <map>
 #include <ArduinoHttpClient.h>
-#include "WiFiS3.h"
+#include "WiFi.h"
 #include "ShellyPlug.h"
 
 class ShellyPlugSimpleControl {
 private:
-  WiFiClient _wifiClient;
+  WiFiClient wifiClient;
 public:
   std::unordered_map<std::string, ShellyPlug> shellies;
 public:
-  ShellyPlugSimpleControl(WiFiClient wifiClient);
-  void setPlug(char name[], bool state);
-  ShellyPlug getInfo(char name[]);
-  void addShellyPlug(char name[], char address[], int port = 80);
+  ShellyPlugSimpleControl(WiFiClient _wifiClient);
+  void setPlug(const char* name, bool _state);
+  ShellyPlug getInfo(const char* name);
+  void addShellyPlug(const char* name, char* address, int port = 80);
 };

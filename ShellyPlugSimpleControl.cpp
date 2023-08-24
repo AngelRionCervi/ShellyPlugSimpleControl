@@ -1,21 +1,20 @@
 #include "ShellyPlugSimpleControl.h"
 
-ShellyPlugSimpleControl::ShellyPlugSimpleControl(WiFiClient wifiClient) {
-  _wifiClient = wifiClient;
+ShellyPlugSimpleControl::ShellyPlugSimpleControl(WiFiClient _wifiClient)
+  : wifiClient(_wifiClient) {}
+
+void ShellyPlugSimpleControl::setPlug(const char* name, bool _state) {
+  ShellyPlug& shelly = shellies.at(name);
+  shelly.setState(_state);
 }
 
-void ShellyPlugSimpleControl::setPlug(char name[], bool state) {
-  ShellyPlug shelly = shellies.at(name);
-  shelly.setState(state);
-}
-
-void ShellyPlugSimpleControl::addShellyPlug(char name[], char address[], int port) {
-  HttpClient httpClient = HttpClient(_wifiClient, address, port);
-
-  ShellyPlug newShellyPlug(address, port, httpClient);
+void ShellyPlugSimpleControl::addShellyPlug(const char* name, char* address, int port) {
+  ShellyPlug newShellyPlug(address, port, wifiClient);
   shellies.emplace(name, newShellyPlug);
+  ShellyPlug& shelly = shellies.at(name);
+  shelly.init();
 }
 
-ShellyPlug ShellyPlugSimpleControl::getInfo(char name[]) {
+ShellyPlug ShellyPlugSimpleControl::getInfo(const char* name) {
   return shellies.at(name);
 }
