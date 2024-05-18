@@ -13,5 +13,5 @@ public:
   ShellyPlugSimpleControl(WiFiClient _wifiClient);
   void setPlug(const char* name, bool _state);
   ShellyPlug getInfo(const char* name);
-  void addShellyPlug(const char* name, char* address, int port = 80);
+  void addShellyPlug(const char* name, const char* address, int port = 80);
 };

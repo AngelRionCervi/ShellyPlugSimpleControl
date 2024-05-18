@@ -8,7 +8,7 @@ void ShellyPlugSimpleControl::setPlug(const char* name, bool _state) {
   shelly.setState(_state);
 }
 
-void ShellyPlugSimpleControl::addShellyPlug(const char* name, char* address, int port) {
+void ShellyPlugSimpleControl::addShellyPlug(const char* name, const char* address, int port) {
   ShellyPlug newShellyPlug(address, port, wifiClient);
   shellies.emplace(name, newShellyPlug);
   ShellyPlug& shelly = shellies.at(name);

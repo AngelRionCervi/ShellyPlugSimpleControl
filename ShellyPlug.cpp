@@ -1,6 +1,6 @@
 #include "ShellyPlug.h"
 
-ShellyPlug::ShellyPlug(char* _address, int _port, WiFiClient _wifiClient)
+ShellyPlug::ShellyPlug(const char* _address, int _port, WiFiClient _wifiClient)
   : address(_address), port(_port), wifiClient(_wifiClient) {}
 
 void ShellyPlug::setState(bool _state) {
